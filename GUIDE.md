@@ -91,8 +91,8 @@ Replace `[arguments]` with the actual arguments for the tool.
 The Secret Exposure Analysis Tool accepts several command-line arguments:
 
 - `-t, --target`: (Required) Target as path to scan.
-- `-ov, --output-via`: (Required) Specify output method: "file" or "webhook".
-- `-w, --webhook`: Webhook URL (required if output_via is "webhook").
+- `-ov, --output-via`: (Required) Output method. Only `file` is supported for now; webhook output is not implemented yet.
+- `-w, --webhook`: Reserved for future webhook output (not implemented yet).
 - `-o, --output`: File path for output (required if output_via is "file").
 - `-l, --log`: Log level (DEBUG or ERROR, default is DEBUG).
 
@@ -103,10 +103,6 @@ The Secret Exposure Analysis Tool accepts several command-line arguments:
    sudo docker run --rm -it -v $(pwd)/output:/output -v /path/to/scan:/scan secret-exposure-analysis -t /scan -ov file -o /output/results.json
    ```
 
-2. Scan a local directory and send results to a webhook:
-   ```bash
-   sudo docker run --rm -it -v /path/to/scan:/scan secret-exposure-analysis -t /scan -ov webhook -w https://webhook.site/your-unique-url
-   ```
 
 
 Note: When using file output or scanning local directories, you need to mount volumes to access the results or scan targets from your host machine.
@@ -115,7 +111,7 @@ Note: When using file output or scanning local directories, you need to mount vo
 
 1. **Permission Issues**: If you encounter permission problems when writing to mounted volumes, you may need to adjust the permissions or use a named volume.
 
-2. **Network Issues**: Ensure your Docker network settings allow the container to access the target network or webhook URL.
+2. **Network Issues**: Ensure your Docker network settings allow the container to access the target network.
 
 3. **Missing Requirements**: If the build fails due to missing requirements, check that your `requirements.txt` file is up to date and includes all necessary dependencies.
 
